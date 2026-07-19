@@ -1371,17 +1371,22 @@ class GatewayHandler(BaseHTTPRequestHandler):
             json_response(self, 200, {"object": "list", "data": recent_request_logs(limit)})
             return
         if path == "/health":
+            config = current_config()
+            listen_host, listen_port = self.server.server_address[:2]
+            upstreams = current_model_upstreams()
             upstream_health = {}
-            for model in sorted(current_model_upstreams()):
+            for model in sorted(upstreams):
                 try:
                     upstream_health[model] = upstream_get(model, "/models").get("object", "ok")
                 except Exception as exc:
                     upstream_health[model] = f"error: {type(exc).__name__}: {exc}"
             json_response(self, 200, {
                 "status": "ok",
-                "default_model": DEFAULT_MODEL,
-                "listen_port": DEFAULT_PORT,
-                "upstreams": MODEL_UPSTREAMS,
+                "public_model": config["public_model"],
+                "default_model": config["default_text_model"],
+                "listen_host": listen_host,
+                "listen_port": listen_port,
+                "upstreams": upstreams,
                 "upstream_health": upstream_health,
                 "auth_enabled": bool(GATEWAY_API_KEY),
             })
