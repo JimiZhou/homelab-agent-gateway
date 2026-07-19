@@ -1,0 +1,21 @@
+{
+  "model": "homelab-agent",
+  "stream": false,
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "What is in this image?"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "https://httpbin.org/image/jpeg"
+          }
+        }
+      ]
+    }
+  ]
+}

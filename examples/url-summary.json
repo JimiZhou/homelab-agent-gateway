@@ -1,0 +1,10 @@
+{
+  "model": "homelab-agent",
+  "stream": false,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Summarize https://example.com in one sentence and include the source URL."
+    }
+  ]
+}

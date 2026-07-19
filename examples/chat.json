@@ -1,0 +1,10 @@
+{
+  "model": "homelab-agent",
+  "stream": false,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Explain what this gateway does in two sentences."
+    }
+  ]
+}
